@@ -1,9 +1,24 @@
+/*
+ * Author: Rohit Mourya
+ * Date: 28th April 2017
+ * Graph Traversal using BFS and DFS.
+ * Time Complexity: O(V + E)
+ * */
+
 package Graph;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+class Edge {
+	// can add more attributes such as weight
+	int s,d;
+	Edge(int s,int d) {
+		this.s = s;
+		this.d = d;
+	}
+}
 public class Graph {
 	
 	public static final int WHITE = 0;
@@ -13,7 +28,7 @@ public class Graph {
 	
 	int time;
 	int n;
-	ArrayList<Integer> edges[];
+	ArrayList<Edge> edges[];
 	
 	int []color = new int[MAX];
 	int []dist= new int[MAX];
@@ -30,13 +45,18 @@ public class Graph {
 		this.n=n;
 		time = 0;
 		//edges = new ArrayList<Integer>();
-		edges = (ArrayList<Integer>[])new ArrayList[n];
+		edges = (ArrayList<Edge>[])new ArrayList[n];
 		for(int i=0;i<n;++i)
-			edges[i] = new ArrayList<Integer>(n);
+			edges[i] = new ArrayList<Edge>(n);
 	}
 	
 	public void addEdge (int s,int d) {
-		this.edges[s].add(d);
+		Edge ed = new Edge (s,d);
+		
+		this.edges[ed.s].add(ed);
+		
+		// for undirected graph uncomment below line
+		// this.edges[ed.d].add(ed);
 	}
 	
 	public void BFS(int s) {
@@ -53,18 +73,25 @@ public class Graph {
 		parent[s] = -1;
 		
 		q.add(s);
+		
 		while(!q.isEmpty()) {
+			// visit current vertex
 			int u = q.remove();
 			System.out.print(u+" ");
+			
 			for(int i = 0;i<edges[u].size();++i) {
-				int v = edges[u].get(i);
+				
+				int v = edges[u].get(i).d;
+				// if not visited
 				if(color[v] == WHITE) {
-					
+					// mark as visited
 					color[v] = GRAY;
 					dist[v] = dist[u] + 1;
+					parent[v] = u;
 					q.add(v);
 				}
 			}
+			// mark it as BLACK once all its adjacent nodes are explored
 			color[u] = BLACK;
 		}
 		
@@ -72,10 +99,11 @@ public class Graph {
 	public void DFSVisit(int u) {
 		color[u] = GRAY;
 		time++;
+		// record discovery time
 		dist[u] = time;
 		System.out.print(u+" ");
 		for(int i = 0;i<edges[u].size();++i) {
-			int v = edges[u].get(i);
+			int v = edges[u].get(i).d;
 			if(color[v] == WHITE) {
 				parent[v] = u;
 				DFSVisit(v);
@@ -83,6 +111,7 @@ public class Graph {
 		}
 		color[u]=BLACK;
 		time++;
+		// record finishing time
 		finish[u]=time;
 	}
 	public void DFS() {
