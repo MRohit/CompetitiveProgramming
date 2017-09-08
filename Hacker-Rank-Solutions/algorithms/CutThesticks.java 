@@ -1,0 +1,51 @@
+/* IMPORTANT: class must not be public. */
+
+/*
+ * uncomment this if you want to read input.
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+*/
+import java.io.*;
+import java.util.*;
+
+
+
+class TestClass {
+    public static void main(String[] args) {
+     /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+      List<Integer> lst=new ArrayList<Integer>();
+      int n;
+      Scanner sc=new Scanner(System.in);
+      n=sc.nextInt();
+       int small=1001;
+      for(int i=0;i<n;++i){
+        int no=sc.nextInt();
+         lst.add(no);
+        if(small>no)
+            small=no;
+        }
+      /*lst.add(5);
+      lst.add(4);
+      lst.add(4);
+      lst.add(2);
+      lst.add(2);
+      lst.add(8);
+      */
+      Collections.sort(lst);
+      System.out.println(lst.size());
+      small = lst.get(0);
+      int cnt=0;
+      int size = lst.size();
+      for(int i=0;i<lst.size();i++) {
+          //System.out.println("Small:"+small);
+          if(small == lst.get(i))
+            cnt++;
+          else {
+            System.out.println(lst.size() - i );
+            //size = lst.size() -i;
+            cnt=0;
+            small = lst.get(i);
+          }
+      }
+   }
+}
