@@ -3,3 +3,5 @@ Backup of all the problems which I solve on various competitive websites includi
 Goal is to reach top 100 on each of these websites.
 Current rank on Hackerrank for Algorithms: 62000 --> moved to 50000 --> moved to 30000
 Hackerrank Algorithms topics progress: Warmup, Implementation (half done).
+
+Started solving Top 10 Algorithms asked in Interview from geeksforgeeks.
