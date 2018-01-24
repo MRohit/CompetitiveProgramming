@@ -8,18 +8,19 @@ The Node class is defined as follows:
         Node prev;
      }
 */
-    boolean isBST (Node root, Node prev) {
-        if (root != null) {
-            if (!isBST(root.left,prev))
-                return false;
-            if (prev != null && root.data <= prev.data)
-                return false;
-            prev = root;
-            return isBST(root.right,prev);
-        }
-        return true;
+    boolean isBST (Node root, Node left, Node right) {
+        if (root == null)
+            return true;
+        if (left != null && root.data <= left.data)
+            return false;
+
+        if (right != null && root.data >= right.data)
+            return false;
+
+        return isBST (root.left, left, root) && isBST (root.right, root, right);
+
     }
     boolean checkBST(Node root) {
         Node prev = null;
-        return isBST(root, prev);
+        return isBST(root, null,null);
     }
