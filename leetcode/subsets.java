@@ -1,4 +1,6 @@
-class Solution {
+import java.util.*;
+
+class subSets {
     public List<List<Integer>> subsets(int[] nums) {
         int setSize = nums.length;
         //int powerSetSize = (Integer) Math.pow (2, setSize);

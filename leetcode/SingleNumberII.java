@@ -1,4 +1,4 @@
-class Solution {
+class SingleNumberII {
     public int singleNumber(int[] nums) {
         int once = 0, twice = 0;
         for (int i=0;i<nums.length;i++) {
